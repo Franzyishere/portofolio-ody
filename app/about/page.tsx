@@ -1,20 +1,51 @@
 "use client";
-import { motion } from "framer-motion";
 
-export default function About() {
+import { useState } from "react";
+import ProjectCard from "@/components/ProjectCard";
+import ProjectModal from "@/components/ProjectModal";
+import { Project } from "@/types/project";
+
+export default function ProjectsPage() {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState<Project | null>(null);
+
+  const projects: Project[] = [
+    {
+      title: "Rozers Store",
+      description: "Website top-up game built with Laravel, React, and Midtrans.",
+      image: "/projects/rozers.png",
+      tech: ["Laravel", "React", "MySQL", "Midtrans"],
+      demo: "",
+      repo: "",
+    },
+    {
+      title: "Face Recognition System",
+      description: "Employee attendance system using Laravel + Flask + FaceNet.",
+      image: "/projects/face-recognition.png",
+      tech: ["Laravel", "Flask", "Python", "MySQL"],
+      demo: "",
+      repo: "",
+    },
+  ];
+
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="max-w-2xl mx-auto mt-24"
-    >
-      <h2 className="text-3xl font-bold mb-4">Tentang Saya</h2>
-      <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-        Halo! Saya Ody Frans, lulusan D3 Teknologi Informasi yang tertarik
-        pada pengembangan web modern, AI, dan desain antarmuka yang elegan.
-        Saya senang belajar teknologi baru dan mengubah ide menjadi produk nyata.
-      </p>
-    </motion.section>
+    <div className="max-w-5xl mx-auto p-6 mt-24">
+      <h1 className="text-3xl font-bold mb-6">Projects</h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {projects.map((item, i) => (
+          <ProjectCard
+            key={i}
+            project={item}
+            onClick={() => {
+              setSelected(item);
+              setOpen(true);
+            }}
+          />
+        ))}
+      </div>
+
+      <ProjectModal open={open} project={selected} onClose={() => setOpen(false)} />
+    </div>
   );
 }
