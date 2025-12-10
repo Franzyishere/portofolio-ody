@@ -20,9 +20,9 @@ export default function ProjectsPage() {
     },
     {
       title: "Face Recognition System",
-      description: "Employee attendance system using Laravel + Flask + FaceNet.",
+      description: "Employee attendance system using Flask + OpenCV for face recognition",
       image: "/projects/face-recognition.png",
-      tech: ["Laravel", "Flask", "Python", "MySQL"],
+      tech: ["Flask", "Python", "MySQL"],
       demo: "",
       repo: "",
     },
